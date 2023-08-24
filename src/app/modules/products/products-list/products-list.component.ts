@@ -1,17 +1,19 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IProduct } from '../models/products.model';
-import { Subscription, tap } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged, filter, fromEvent, tap } from 'rxjs';
 import { ProductsService } from '../services/products.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductsAddComponent } from '../products-add/products-add.component';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit , OnDestroy {
+export class ProductsListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   displayedColumns: string[] = ['id', 'title', 'image' ,  'price', 'description' , 'category'  , 'rate' , 'count' , 'actions'];
   dataSource!: MatTableDataSource<IProduct>;
@@ -19,15 +21,32 @@ export class ProductsListComponent implements OnInit , OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @ViewChild('input') input!: ElementRef;
+
+
   subscription:Subscription = new Subscription();
 
-  constructor(private productsService:ProductsService) {
+  constructor(private productsService:ProductsService,private dialog: MatDialog) {
     
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
+
+  ngAfterViewInit() {
+   const sub = fromEvent(this.input.nativeElement,'keyup')
+      .pipe(
+        filter(Boolean),
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => {
+          this.applyFilter(this.input.nativeElement.value);
+        })
+     )
+    .subscribe();
+    this.subscription.add(sub);
+}
 
   getProducts(){
     const sub = this.productsService.getProducts()
@@ -41,30 +60,65 @@ export class ProductsListComponent implements OnInit , OnDestroy {
   }
 
   openModalAddProduct(){
-    
+    const dialogRef = this.dialog.open(ProductsAddComponent, {
+      panelClass:['customDialog']
+    });
+    dialogRef.afterClosed().subscribe((product:IProduct | null) => {
+      if(product){
+        this._addProduct(product);
+      }
+    });
   }
 
-  deleteProduct(product:IProduct){
-    const sub = this.productsService.deleteProducts(product.id)
+  openModalEditProduct(product:IProduct){
+    const dialogRef = this.dialog.open(ProductsAddComponent, {
+      panelClass:['customDialog'],
+      data:{
+        product:product
+      }
+    });
+    dialogRef.afterClosed().subscribe((product:IProduct | null) => {
+      if(product){
+        this._editProduct(product);
+      }
+    });
+  }
+
+  deleteProduct(productId:number){
+    const sub = this.productsService.deleteProducts(productId)
     .pipe(
       tap((product)=>{
-        this.removeIndex(product);
+        this.removeIndex(productId);
       })
     )
     .subscribe();
     this.subscription.add(sub);
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  private removeIndex(product:IProduct){
-    this._assignDataSource(this.dataSource.data.filter(x => x.id != product.id));
+  private _addProduct(product:IProduct){
+    this.dataSource.data.push(product);
+    this._assignDataSource([product , ...this.dataSource.data]);
+    this._applyPagination();
+  }
+
+  private _editProduct(product:IProduct){
+    const ref = this.dataSource.data.map(x => {
+      if(x.id == product.id) return product;
+      else return x;
+    });
+    this._assignDataSource(ref);
+    this._applyPagination();
+  }
+
+  private removeIndex(productId:number){
+    this._assignDataSource(this.dataSource.data.filter(x => x.id != productId));
     this._applyPagination();
   }
 

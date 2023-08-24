@@ -15,7 +15,19 @@ export class ProductsService {
     return this.http.get<IProduct[]>(this.baseUrl + 'products');
   }
 
-  deleteProducts(id:number):Observable<IProduct>{
+  addProducts(product:IProduct):Observable<IProduct>{
+    const stringObject = JSON.stringify(product);
+    return this.http.post<IProduct>(this.baseUrl + 'products' , stringObject);
+  }
+
+
+  //put request make an error so i will use post method as testing
+  updateProducts(product:IProduct):Observable<IProduct>{
+    const stringObject = JSON.stringify(product);
+    return this.http.post<IProduct>(this.baseUrl + 'products' , stringObject);
+  }
+  
+  deleteProducts(id:number | null):Observable<IProduct>{
     return this.http.delete<IProduct>(this.baseUrl + 'products/' + id);
   }
 }

@@ -1,0 +1,81 @@
+<div class="modal-header flex p-5 justify-between items-center  ">
+    <div class="modal-title font-bold text-2xl ">
+        <span *ngIf="!productForm.get(['id'])!.value">
+            Add Product
+        </span>
+        <span *ngIf="productForm.get(['id'])!.value">
+            Edit Product
+        </span>
+    </div>
+    <button type="button" class="close text-4xl" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+</div>
+
+<form class="example-form w-full p-5" [formGroup]="productForm">
+
+    <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Title</div>
+        <mat-form-field appearance="outline" class="custom-field">
+        <input type="text" matInput formControlName="title"
+                placeholder="title">
+        </mat-form-field>
+    </div>
+
+    <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Price</div>
+        <mat-form-field appearance="outline" class="custom-field">
+            <input type="number" matInput formControlName="price"
+                placeholder="Price">
+        </mat-form-field>
+    </div>
+
+    <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Description</div>
+      <mat-form-field appearance="outline" class="custom-field-textarea">
+        <textarea
+        formControlName="description"
+        placeholder="Description"
+        matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="3"
+            cdkAutosizeMaxRows="5"></textarea>
+      </mat-form-field>
+    </div>
+
+     <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Category</div>
+        <mat-form-field appearance="outline" class="custom-field">
+          <input type="text" matInput formControlName="category"
+                 placeholder="category">
+        </mat-form-field>
+     </div>
+
+
+      <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Rate</div>
+        <mat-form-field appearance="outline" class="custom-field">
+            <input type="number" matInput formControlName="rate"
+                placeholder="rate">
+        </mat-form-field>
+      </div>
+
+      <div class="w-full">
+        <div class="font-medium text-sm text-black mb-2">Count</div>
+        <mat-form-field appearance="outline" class="custom-field">
+            <input type="number" matInput formControlName="count"
+                placeholder="count">
+        </mat-form-field>
+      </div>
+      
+      <div class="flex justify-end" >
+        <button  (click)="save()" [disabled]="productForm.invalid || loader" class=" bg-white px-4 h-14 rounded-xl text-blue border font-bold text-lg flex items-center justify-center gap-5">
+            <span *ngIf="!productForm.get(['id'])!.value">
+                Add Product
+            </span>
+            <span *ngIf="productForm.get(['id'])!.value">
+                Edit Product
+            </span>
+            <mat-spinner *ngIf="loader" class="button-loader"></mat-spinner>
+        </button>
+      </div>
+</form>

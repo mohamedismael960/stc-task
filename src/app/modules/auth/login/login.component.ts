@@ -30,5 +30,6 @@ export class LoginComponent {
     }else{
       // alert enter valid data
     }
+    this.loader = false;
   }
 }

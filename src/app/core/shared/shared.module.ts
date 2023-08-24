@@ -10,6 +10,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatTabsModule } from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     exports:[
@@ -24,7 +25,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatCheckboxModule,
         MatTabsModule,
         MatProgressSpinnerModule,
-        MatIconModule
+        MatIconModule,
+        MatDialogModule
     ],
     providers: [  
         MatDatepickerModule,  

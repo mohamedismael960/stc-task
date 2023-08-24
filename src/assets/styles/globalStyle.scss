@@ -6,3 +6,30 @@ button:disabled{
     opacity: .5;
     cursor: not-allowed;
 }
+
+//=================================================
+// CustomDialog
+//=================================================
+.customDialog{
+    overflow: auto;
+    max-width: 100% !important;
+    width: 60%;
+    .mat-dialog-container{
+        padding: 24px 0;
+    }
+    @media only screen and (max-width: 960px) {
+        width: 100% !important;
+        .mat-dialog-container{
+            border-radius: 0px !important;
+        }
+    }
+}
+
+//=================================================
+// loaders
+//=================================================
+.button-loader{
+    width: 25px !important;
+    height: 25px !important;
+    display: inline-block !important;
+  }

@@ -11,11 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductsAddComponent } from './products-add/products-add.component';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     ProductsListComponent,
+    ProductsAddComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +28,8 @@ import { ProductsListComponent } from './products-list/products-list.component';
     MatFormFieldModule, 
     MatInputModule, 
     MatSortModule, 
-    MatPaginatorModule
+    MatPaginatorModule,
+    TextFieldModule
   ]
 })
 export class ProductsModule { }
