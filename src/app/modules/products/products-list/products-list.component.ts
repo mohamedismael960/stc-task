@@ -13,16 +13,13 @@ import { ProductsAddComponent } from '../products-add/products-add.component';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit , AfterViewInit , OnDestroy {
+export class ProductsListComponent implements OnInit , OnDestroy {
 
   displayedColumns: string[] = ['id', 'title', 'image' ,  'price', 'description' , 'category'  , 'rate' , 'count' , 'actions'];
   dataSource!: MatTableDataSource<IProduct>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  @ViewChild('input') input!: ElementRef;
-
 
   subscription:Subscription = new Subscription();
 
@@ -33,20 +30,6 @@ export class ProductsListComponent implements OnInit , AfterViewInit , OnDestroy
   ngOnInit(): void {
     this.getProducts();
   }
-
-  ngAfterViewInit() {
-   const sub = fromEvent(this.input.nativeElement,'keyup')
-      .pipe(
-        filter(Boolean),
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap(() => {
-          this.applyFilter(this.input.nativeElement.value);
-        })
-     )
-    .subscribe();
-    this.subscription.add(sub);
-}
 
   getProducts(){
     const sub = this.productsService.getProducts()

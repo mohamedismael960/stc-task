@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth-service.service';
+import { AuthService } from 'src/app/core/authentication/auth-service.service';
 
 @Component({
   selector: 'app-header-layout',

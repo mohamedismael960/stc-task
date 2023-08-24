@@ -31,5 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     providers: [  
         MatDatepickerModule,  
     ],
+    declarations: [
+      
+    ],
   })
   export class SharedModule { }

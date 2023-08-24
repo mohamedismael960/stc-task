@@ -13,6 +13,7 @@ import { MatPaginatorModule} from '@angular/material/paginator';
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsAddComponent } from './products-add/products-add.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { SearchTextComponent } from 'src/app/core/shared/search-text/search-text.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     MatInputModule, 
     MatSortModule, 
     MatPaginatorModule,
-    TextFieldModule
+    TextFieldModule,
+    SearchTextComponent
   ]
 })
 export class ProductsModule { }
