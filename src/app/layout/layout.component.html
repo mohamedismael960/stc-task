@@ -1,0 +1,14 @@
+<div class="bg-bg_main h-full">
+    <div class="h-full">
+        <app-header-layout class="sticky top-0 z-50"></app-header-layout>
+        <mat-drawer-container class="example-container">
+            <mat-drawer class="fixed top-16" #drawer [opened]="true" [mode]="'side'">
+                <app-side-menu class="sticky top-0 z-50"></app-side-menu>
+            </mat-drawer>
+            <mat-drawer-content class="p-11">
+                <router-outlet></router-outlet>
+            </mat-drawer-content>
+        </mat-drawer-container>
+    </div>
+</div>
+

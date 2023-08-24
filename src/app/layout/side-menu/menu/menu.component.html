@@ -1,0 +1,11 @@
+<div class="flex items-between">
+    <div class="text-xs	text-secondary_color w-16 font-bold mb-6">Menu</div>
+
+</div>
+<div class="flex items-center gap-x-2.5 mb-6 mx-6 cursor-pointer group" *ngFor="let item of menuList"
+    [routerLink]="[item.route]"
+    [routerLinkActive]="'active'"
+> 
+    <img [src]="item.icon" alt="" >
+    <div class="text-sm	font-bold text-dark group-hover:text-primary_color text">{{item.name}}</div>
+</div>
