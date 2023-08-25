@@ -30,7 +30,6 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
     .pipe(
       tap((products:IProduct[]) =>{
         this.assignDataSource(products);
-        this.applyPagination();
       })
     ).subscribe();
     this.subscription.add(sub);

@@ -14,7 +14,6 @@ export class BaseEntityComponent<T extends IEntity>  {
   dataSource!: MatTableDataSource<T>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     
@@ -30,7 +29,7 @@ export class BaseEntityComponent<T extends IEntity>  {
   addItem(item:T){
     this.dataSource.data.push(item);
     this.assignDataSource([item , ...this.dataSource.data]);
-    this.applyPagination();
+    this._applyPagination();
   }
 
   editItem(item:T){
@@ -39,21 +38,26 @@ export class BaseEntityComponent<T extends IEntity>  {
       else return x;
     });
     this.assignDataSource(ref);
-    this.applyPagination();
+    this._applyPagination();
   }
 
   removeIndex(itemId:number){
     this.assignDataSource(this.dataSource.data.filter(x => x.id != itemId));
-    this.applyPagination();
+    this._applyPagination();
   }
 
   assignDataSource(items:T[]){
     this.dataSource = new MatTableDataSource(items);
+    this._applyPagination();
   }
 
-  applyPagination(){
+
+  //=================================================
+  // Private Methods
+  //=================================================
+  
+  private _applyPagination(){
     this.dataSource.paginator = this.paginator;
   }
-
 
 }
