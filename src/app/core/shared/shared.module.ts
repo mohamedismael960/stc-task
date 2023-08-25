@@ -11,8 +11,12 @@ import { MatTabsModule } from "@angular/material/tabs";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
+import { HasAnyAuthorityDirective } from "../directives/hasAnyAuthority.directive";
 
 @NgModule({
+    imports:[
+        HasAnyAuthorityDirective
+    ],
     exports:[
         MatInputModule,
         MatFormFieldModule,
@@ -26,7 +30,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatTabsModule,
         MatProgressSpinnerModule,
         MatIconModule,
-        MatDialogModule
+        MatDialogModule,
+        HasAnyAuthorityDirective
     ],
     providers: [  
         MatDatepickerModule,  

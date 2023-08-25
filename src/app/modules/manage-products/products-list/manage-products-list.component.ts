@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, finalize, tap } from 'rxjs';
+import { Subject, Subscription, finalize, takeUntil, tap } from 'rxjs';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsAddComponent } from '../manage-products-add/manage-products-add.component';
@@ -15,7 +15,7 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
 
   override displayedColumns: string[] = ['id', 'title', 'image' ,  'price', 'description' , 'category'  , 'rate' , 'count' , 'actions'];
 
-  subscription:Subscription = new Subscription();
+  private readonly destroy$ = new Subject<void>();
 
   loader:boolean = false;
 
@@ -29,8 +29,9 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
 
   getProducts(){
     this.loader = true;
-    const sub = this.manageProductsService.getAll()
+    this.manageProductsService.getAll()
     .pipe(
+      takeUntil(this.destroy$),
       tap((products:IProduct[]) =>{
         this.assignDataSource(products);
       }),
@@ -38,7 +39,6 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
         this.loader = false;
       })
     ).subscribe();
-    this.subscription.add(sub);
   }
 
   openModalAddProduct(){
@@ -68,8 +68,9 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
 
   deleteProduct(productId:number){
     this.loader = true;
-    const sub = this.manageProductsService.delete(productId)
+    this.manageProductsService.delete(productId)
     .pipe(
+      takeUntil(this.destroy$),
       tap(()=>{
         this.removeIndex(productId);
       }),
@@ -78,10 +79,10 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
       })
     )
     .subscribe();
-    this.subscription.add(sub);
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

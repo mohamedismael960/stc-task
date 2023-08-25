@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
-import { Observable, Subscription, finalize, tap } from 'rxjs';
+import { Observable, Subject, Subscription, finalize, takeUntil, tap } from 'rxjs';
 import { IProduct, Product } from 'src/app/core/models/products.model';
 
 @Component({
@@ -24,7 +24,9 @@ export class ManageProductsAddComponent implements OnInit {
     count:['',[Validators.required]],
   });
 
-  subscription:Subscription = new Subscription();
+  
+  private readonly destroy$ = new Subject<void>();
+
   constructor(
     private _fb:FormBuilder,
     public dialogRef: MatDialogRef<ManageProductsAddComponent>,
@@ -53,7 +55,8 @@ export class ManageProductsAddComponent implements OnInit {
 
 
   protected subscribeToSaveResponse(result: Observable<IProduct>): void {
-    const sub = result.pipe(
+    result.pipe(
+      takeUntil(this.destroy$),
       tap(()=>{
         const pro = this.createFromForm();
         if(!pro.id){
@@ -63,7 +66,6 @@ export class ManageProductsAddComponent implements OnInit {
       }),
       finalize(() => this.onSaveFinalize())
       ).subscribe();
-    this.subscription.add(sub);
   }
 
   protected onSaveFinalize(): void {
@@ -100,5 +102,10 @@ export class ManageProductsAddComponent implements OnInit {
 
   cancel(): void {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

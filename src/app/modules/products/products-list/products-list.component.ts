@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { Observable, Subscription, finalize, tap } from 'rxjs';
+import { Observable, Subject, Subscription, finalize, tap } from 'rxjs';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { IProduct } from 'src/app/core/models/products.model';
 import { ManageCategoriesService } from 'src/app/core/services/manage-categories.service copy';
@@ -10,10 +10,7 @@ import { ICategory } from 'src/app/core/models/categories';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit , OnDestroy {
-
-
-  subscription:Subscription = new Subscription();
+export class ProductsListComponent implements OnInit  {
   
   categories!:Observable<ICategory[]>;
 
@@ -48,7 +45,4 @@ export class ProductsListComponent implements OnInit , OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-      this.subscription.unsubscribe();
-  }
 }
