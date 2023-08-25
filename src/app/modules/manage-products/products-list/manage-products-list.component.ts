@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, tap } from 'rxjs';
+import { Subscription, finalize, tap } from 'rxjs';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsAddComponent } from '../manage-products-add/manage-products-add.component';
@@ -17,6 +17,8 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
 
   subscription:Subscription = new Subscription();
 
+  loader:boolean = false;
+
   constructor(private manageProductsService:ManageProductsService,private dialog: MatDialog) {
     super();
   }
@@ -26,10 +28,14 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
   }
 
   getProducts(){
+    this.loader = true;
     const sub = this.manageProductsService.getAll()
     .pipe(
       tap((products:IProduct[]) =>{
         this.assignDataSource(products);
+      }),
+      finalize(()=>{
+        this.loader = false;
       })
     ).subscribe();
     this.subscription.add(sub);
@@ -61,10 +67,14 @@ export class ManageProductsListComponent extends BaseEntityComponent<IProduct> i
   }
 
   deleteProduct(productId:number){
+    this.loader = true;
     const sub = this.manageProductsService.delete(productId)
     .pipe(
       tap(()=>{
         this.removeIndex(productId);
+      }),
+      finalize(()=>{
+        this.loader = false;
       })
     )
     .subscribe();

@@ -7,7 +7,7 @@
     </button> 
 </div>
 
-  
+<div class="relative">
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
   
@@ -87,5 +87,13 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
+
+
+  <div *ngIf="loader" class="absolute top-10 inset-x-0">
+    <mat-spinner class="m-auto mt-5"></mat-spinner>
+  </div>
+</div>
+
+
   
   
