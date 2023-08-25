@@ -14,44 +14,14 @@ export class MenuComponent {
       route : "/dashboard"
     },
     {
+      name : "Manage Products",
+      icon : "assets/svgs/dashboard.svg",
+      route : "/admin/products"
+    },
+    {
       name : "Products",
       icon : "assets/svgs/dashboard.svg",
       route : "/products"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
-    },
-    {
-      name : "Menu",
-      icon : "assets/svgs/dashboard.svg",
-      route : "/menu"
     },
   ]
 }

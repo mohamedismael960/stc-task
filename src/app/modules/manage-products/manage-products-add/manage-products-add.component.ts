@@ -1,16 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductsService } from '../services/products.service';
-import { IProduct, Product } from '../models/products.model';
+import { ManageProductsService } from '../services/manage-products.service';
+import { IProduct, Product } from '../models/manage-products.model';
 import { Observable, Subscription, finalize, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-products-add',
-  templateUrl: './products-add.component.html',
-  styleUrls: ['./products-add.component.scss']
+  selector: 'app-manage-products-add',
+  templateUrl: './manage-products-add.component.html',
+  styleUrls: ['./manage-products-add.component.scss']
 })
-export class ProductsAddComponent implements OnInit {
+export class ManageProductsAddComponent implements OnInit {
 
   loader:boolean = false;
 
@@ -27,8 +27,8 @@ export class ProductsAddComponent implements OnInit {
   subscription:Subscription = new Subscription();
   constructor(
     private _fb:FormBuilder,
-    public dialogRef: MatDialogRef<ProductsAddComponent>,
-    private productsService:ProductsService,
+    public dialogRef: MatDialogRef<ManageProductsAddComponent>,
+    private manageProductsService:ManageProductsService,
     @Inject(MAT_DIALOG_DATA) public data: any
     ){
       if(data?.product){
@@ -45,9 +45,9 @@ export class ProductsAddComponent implements OnInit {
     this.loader = true;
     const product = this.createFromForm();
     if(product.id){
-      this.subscribeToSaveResponse(this.productsService.update(product));
+      this.subscribeToSaveResponse(this.manageProductsService.update(product));
     }else{
-      this.subscribeToSaveResponse(this.productsService.add(product));
+      this.subscribeToSaveResponse(this.manageProductsService.add(product));
     }
   }
 
