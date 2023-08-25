@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { Authority } from '../config/authority.constants';
+import { AuthGuard } from '../core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +15,10 @@ const routes: Routes = [
       },
       {
         path : 'admin',
+        canActivate:[AuthGuard],
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         children:[
           {
             path:'products',
