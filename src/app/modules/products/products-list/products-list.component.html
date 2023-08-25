@@ -2,7 +2,7 @@
   <div class="font-medium text-sm text-black mb-2">Select Category</div>
   <mat-form-field appearance="outline" class="custom-field">
     <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="getProduct()">
-      <mat-option *ngFor="let category of categories | async" [value]="category">
+      <mat-option *ngFor="let category of categories | async;trackBy: trackByFn" [value]="category">
         {{category}}
       </mat-option>
     </mat-select>
@@ -11,12 +11,11 @@
 
 
 <div class="flex flex-wrap justify-between gap-5" *ngIf="selectedCategory">
-  <div *ngFor="let product of products | async">
+  <div *ngFor="let product of products | async;trackBy: trackByFn">
     <div class="max-w-sm bg-white  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <img class="rounded-lg w-80 h-60 p-4 m-auto" [src]="product.image" alt="" />
       <div class="p-5">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.title}}</h5>
-
 
 
           <div class="flex items-center space-x-1 my-3">

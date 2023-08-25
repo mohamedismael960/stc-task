@@ -45,4 +45,8 @@ export class ProductsListComponent implements OnInit  {
     );
   }
 
+  trackByFn(index: number, item: any): any{
+    return item.id || index;
+  }
+
 }
