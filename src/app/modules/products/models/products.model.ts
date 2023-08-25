@@ -1,5 +1,6 @@
-export interface IProduct {
-    id?: number,
+import { IEntity } from "../../base/base-entity.model"
+
+export interface IProduct extends IEntity {
     title?: string,
     price?: number,
     description?: string,

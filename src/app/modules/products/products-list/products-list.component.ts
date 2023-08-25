@@ -32,7 +32,7 @@ export class ProductsListComponent implements OnInit , OnDestroy {
   }
 
   getProducts(){
-    const sub = this.productsService.getProducts()
+    const sub = this.productsService.getAll()
     .pipe(
       tap((products:IProduct[]) =>{
         this._assignDataSource(products);
@@ -68,7 +68,7 @@ export class ProductsListComponent implements OnInit , OnDestroy {
   }
 
   deleteProduct(productId:number){
-    const sub = this.productsService.deleteProducts(productId)
+    const sub = this.productsService.delete(productId)
     .pipe(
       tap((product)=>{
         this.removeIndex(productId);

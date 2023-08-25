@@ -45,9 +45,9 @@ export class ProductsAddComponent implements OnInit {
     this.loader = true;
     const product = this.createFromForm();
     if(product.id){
-      this.subscribeToSaveResponse(this.productsService.updateProducts(product));
+      this.subscribeToSaveResponse(this.productsService.update(product));
     }else{
-      this.subscribeToSaveResponse(this.productsService.addProducts(product));
+      this.subscribeToSaveResponse(this.productsService.add(product));
     }
   }
 
