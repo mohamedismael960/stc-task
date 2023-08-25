@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '../core/translation/translation.service';
-
+import { isModile } from '../Helpers/detectMobile';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if(isModile()){
       this.mode = 'over';
       this.opened = false;
      }else{
@@ -35,7 +35,9 @@ export class LayoutComponent implements OnInit {
   }
 
   closeMenu(){
-    this.opened = false;
+    if(isModile()){
+      this.opened = false;
+    }
   }
 
 }
