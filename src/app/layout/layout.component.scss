@@ -1,0 +1,9 @@
+.top{
+    top: 64px;
+}
+
+@media only screen and (max-width: 600px) {
+    .top{
+        top: 0px !important;
+    }
+  }

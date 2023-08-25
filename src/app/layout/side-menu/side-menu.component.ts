@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-side-menu',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./side-menu.component.scss']
 })
 export class SideMenuComponent {
+
+  @Output() closeMenuEvent = new EventEmitter();
+
+  closeMenu(){
+    this.closeMenuEvent.emit();
+  }
 
 }

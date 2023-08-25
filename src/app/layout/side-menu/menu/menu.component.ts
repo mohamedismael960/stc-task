@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Authority } from 'src/app/config/authority.constants';
 
 @Component({
@@ -7,6 +7,8 @@ import { Authority } from 'src/app/config/authority.constants';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent {
+
+  @Output() closeMenuEvent = new EventEmitter();
 
   authority = Authority;
 
@@ -30,4 +32,8 @@ export class MenuComponent {
       authority:null
     },
   ]
+
+  closeMenu(){
+    this.closeMenuEvent.emit();
+  }
 }

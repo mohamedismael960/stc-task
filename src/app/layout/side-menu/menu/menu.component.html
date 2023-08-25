@@ -10,8 +10,13 @@
     class="flex items-center gap-x-2.5 mb-6 mx-6 cursor-pointer group" 
     [routerLink]="[item.route]"
     [routerLinkActive]="'active'"
+    (click)="closeMenu()"
 > 
     <img [src]="item.icon" alt="" >
     <div class="text-sm	font-bold text-dark group-hover:text-primary_color text">{{item.name | translate}}</div>
 </div>
 </ng-container>
+
+<div>
+
+</div>

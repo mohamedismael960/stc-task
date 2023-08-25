@@ -1,7 +1,7 @@
 
     <mat-toolbar color="primary">
       <button mat-icon-button class="example-icon leading-none mx-2" aria-label="Example icon-button with menu icon">
-        <mat-icon>star</mat-icon>
+        <mat-icon (click)="toggleMenu()">menu</mat-icon>
       </button>
       <span>{{'hello' | translate}} {{username}}</span>
       <span class="example-spacer"></span>

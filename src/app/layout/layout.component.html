@@ -1,12 +1,14 @@
 <div class="bg-bg-main h-full">
     <div class="h-full">
-        <app-header-layout class="sticky top-0 z-50"></app-header-layout>
-        <mat-drawer-container class="example-container" [dir]="getLang">
-            <mat-drawer class="fixed top-16" #drawer [opened]="true" [mode]="'side'">
-                <app-side-menu class="sticky top-0 z-50"></app-side-menu>
+        <mat-drawer-container class="example-container h-full" [dir]="getLang">
+            <mat-drawer class="fixed top" #drawer [opened]="opened" [mode]="mode">
+                <app-side-menu (closeMenuEvent)="closeMenu()" class="sticky z-50"></app-side-menu>
             </mat-drawer>
-            <mat-drawer-content class="p-11">
-                <router-outlet></router-outlet>
+            <mat-drawer-content class="p-10">
+                <app-header-layout (toggleMenuEvent)="toggleMenu()" class="fixed w-full left-0 top-0" style="z-index: 999;"></app-header-layout>
+                <div class="pt-16">
+                    <router-outlet></router-outlet>
+                </div>
             </mat-drawer-content>
         </mat-drawer-container>
     </div>
