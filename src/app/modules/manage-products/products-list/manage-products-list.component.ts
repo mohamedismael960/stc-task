@@ -1,30 +1,24 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IProduct } from '../models/manage-products.model';
 import { Subscription, tap } from 'rxjs';
 import { ManageProductsService } from '../services/manage-products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsAddComponent } from '../manage-products-add/manage-products-add.component';
+import { BaseEntityComponent } from 'src/app/core/base/base-entity.component';
 
 @Component({
   selector: 'app-manage-products-list',
   templateUrl: './manage-products-list.component.html',
   styleUrls: ['./manage-products-list.component.scss']
 })
-export class ManageProductsListComponent implements OnInit , OnDestroy {
+export class ManageProductsListComponent extends BaseEntityComponent<IProduct> implements OnInit , OnDestroy {
 
-  displayedColumns: string[] = ['id', 'title', 'image' ,  'price', 'description' , 'category'  , 'rate' , 'count' , 'actions'];
-  dataSource!: MatTableDataSource<IProduct>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  override displayedColumns: string[] = ['id', 'title', 'image' ,  'price', 'description' , 'category'  , 'rate' , 'count' , 'actions'];
 
   subscription:Subscription = new Subscription();
 
   constructor(private manageProductsService:ManageProductsService,private dialog: MatDialog) {
-    
+    super();
   }
 
   ngOnInit(): void {
@@ -35,8 +29,8 @@ export class ManageProductsListComponent implements OnInit , OnDestroy {
     const sub = this.manageProductsService.getAll()
     .pipe(
       tap((products:IProduct[]) =>{
-        this._assignDataSource(products);
-        this._applyPagination();
+        this.assignDataSource(products);
+        this.applyPagination();
       })
     ).subscribe();
     this.subscription.add(sub);
@@ -48,7 +42,7 @@ export class ManageProductsListComponent implements OnInit , OnDestroy {
     });
     dialogRef.afterClosed().subscribe((product:IProduct | null) => {
       if(product){
-        this._addProduct(product);
+        this.addItem(product);
       }
     });
   }
@@ -62,7 +56,7 @@ export class ManageProductsListComponent implements OnInit , OnDestroy {
     });
     dialogRef.afterClosed().subscribe((product:IProduct | null) => {
       if(product){
-        this._editProduct(product);
+        this.editItem(product);
       }
     });
   }
@@ -70,47 +64,12 @@ export class ManageProductsListComponent implements OnInit , OnDestroy {
   deleteProduct(productId:number){
     const sub = this.manageProductsService.delete(productId)
     .pipe(
-      tap((product)=>{
+      tap(()=>{
         this.removeIndex(productId);
       })
     )
     .subscribe();
     this.subscription.add(sub);
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  private _addProduct(product:IProduct){
-    this.dataSource.data.push(product);
-    this._assignDataSource([product , ...this.dataSource.data]);
-    this._applyPagination();
-  }
-
-  private _editProduct(product:IProduct){
-    const ref = this.dataSource.data.map(x => {
-      if(x.id == product.id) return product;
-      else return x;
-    });
-    this._assignDataSource(ref);
-    this._applyPagination();
-  }
-
-  private removeIndex(productId:number){
-    this._assignDataSource(this.dataSource.data.filter(x => x.id != productId));
-    this._applyPagination();
-  }
-
-  private _assignDataSource(products:IProduct[]){
-    this.dataSource = new MatTableDataSource(products);
-  }
-
-  private _applyPagination(){
-    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {

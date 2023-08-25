@@ -68,7 +68,7 @@
       </div>
       
       <div class="flex justify-end" >
-        <button  (click)="save()" [disabled]="productForm.invalid || loader" class=" bg-white px-4 h-14 rounded-xl text-primary-color border font-bold text-lg flex items-center justify-center gap-5">
+        <button  (click)="save()" [disabled]="productForm.invalid || loader" class=" bg-white px-4 h-14 rounded-xl text-primary_color border font-bold text-lg flex items-center justify-center gap-5">
             <span *ngIf="!productForm.get(['id'])!.value">
                 Add Product
             </span>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IProduct } from '../models/manage-products.model';
-import { BaseEntityService } from '../../base/base-entity.service';
+import { BaseEntityService } from '../../../core/base/base-entity.service';
 @Injectable({
   providedIn: 'root'
 })
