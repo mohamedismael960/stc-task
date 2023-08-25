@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Subject, Subscription, debounceTime, distinctUntilChanged, filter, fromEvent, takeUntil, tap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, fromEvent, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-search-text',

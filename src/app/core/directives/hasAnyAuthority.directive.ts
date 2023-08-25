@@ -1,4 +1,4 @@
-import { Directive, Input, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../authentication/auth-service.service';
 
@@ -7,10 +7,8 @@ import { AuthService } from '../authentication/auth-service.service';
   standalone:true
 })
 
-export class HasAnyAuthorityDirective implements OnDestroy {
+export class HasAnyAuthorityDirective  {
     
-  private readonly destroy$ = new Subject<void>();
-
   constructor(
     private templateRef: TemplateRef<any>,
      private viewContainerRef: ViewContainerRef,
@@ -36,8 +34,4 @@ export class HasAnyAuthorityDirective implements OnDestroy {
     this.viewContainerRef.createEmbeddedView(this.templateRef);
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }

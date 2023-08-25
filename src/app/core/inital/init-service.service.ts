@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../authentication/auth-service.service';
 import { Authority } from 'src/app/config/authority.constants';

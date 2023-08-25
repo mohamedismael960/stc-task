@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { Observable, Subject, Subscription, finalize, tap } from 'rxjs';
+import { Component, OnInit, } from '@angular/core';
+import { Observable, finalize } from 'rxjs';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { IProduct } from 'src/app/core/models/products.model';
 import { ManageCategoriesService } from 'src/app/core/services/manage-categories.service copy';

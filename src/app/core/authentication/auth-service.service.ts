@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { IUser, User } from 'src/app/modules/auth/auth.model';
 import { Authority } from 'src/app/config/authority.constants';
@@ -21,7 +20,7 @@ export class AuthService {
     return this.authority.getValue();
   }
   
-  constructor(private http:HttpClient,private router:Router) { 
+  constructor(private router:Router) { 
     
   }
 

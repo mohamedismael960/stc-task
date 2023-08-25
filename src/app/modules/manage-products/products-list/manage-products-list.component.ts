@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription, finalize, takeUntil, tap } from 'rxjs';
+import { Subject, finalize, takeUntil, tap } from 'rxjs';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsAddComponent } from '../manage-products-add/manage-products-add.component';

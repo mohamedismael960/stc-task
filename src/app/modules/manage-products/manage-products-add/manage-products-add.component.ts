@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ManageProductsService } from '../../../core/services/manage-products.service';
-import { Observable, Subject, Subscription, finalize, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, finalize, takeUntil, tap } from 'rxjs';
 import { IProduct, Product } from 'src/app/core/models/products.model';
 
 @Component({

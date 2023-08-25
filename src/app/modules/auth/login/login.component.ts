@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/auth-service.service';
-import { User } from '../auth.model';
-import { finalize, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
