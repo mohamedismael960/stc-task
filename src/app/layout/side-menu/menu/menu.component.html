@@ -1,5 +1,7 @@
 <div class="flex items-between">
-    <div class="text-xs	text-secondary-color w-16 font-bold mb-6">Menu</div>
+    <div class="text-xs	text-secondary-color w-16 font-bold mb-6">
+        {{'menu' | translate}}
+    </div>
 
 </div>
 <ng-container *ngFor="let item of menuList">
@@ -10,6 +12,6 @@
     [routerLinkActive]="'active'"
 > 
     <img [src]="item.icon" alt="" >
-    <div class="text-sm	font-bold text-dark group-hover:text-primary_color text">{{item.name}}</div>
+    <div class="text-sm	font-bold text-dark group-hover:text-primary_color text">{{item.name | translate}}</div>
 </div>
 </ng-container>

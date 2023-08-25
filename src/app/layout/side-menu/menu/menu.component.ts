@@ -12,19 +12,19 @@ export class MenuComponent {
 
   menuList = [
     {
-      name : "Dashboard",
+      name : "dashboard",
       icon : "assets/svgs/dashboard.svg",
       route : "/dashboard",
       authority:null
     },
     {
-      name : "Manage Products",
+      name : "manage_products",
       icon : "assets/svgs/dashboard.svg",
       route : "/admin/products",
       authority : Authority.ADMIN
     },
     {
-      name : "Products",
+      name : "products",
       icon : "assets/svgs/dashboard.svg",
       route : "/products",
       authority:null

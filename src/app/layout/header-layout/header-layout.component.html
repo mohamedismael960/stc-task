@@ -3,10 +3,19 @@
       <button mat-icon-button class="example-icon leading-none mx-2" aria-label="Example icon-button with menu icon">
         <mat-icon>star</mat-icon>
       </button>
-      <span>Hello {{username}}</span>
+      <span>{{'hello' | translate}} {{username}}</span>
       <span class="example-spacer"></span>
+      <div class="flex items-center mx-5">
+        <button class="leading-none" mat-button [matMenuTriggerFor]="menu">
+          <mat-icon class="leading-none">language</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="switchLang('en')" mat-menu-item>English</button>
+          <button (click)="switchLang('ar')" mat-menu-item>عربى</button>
+        </mat-menu>
+      </div>
       <div (click)="logout()" class="cursor-pointer whitespace-nowrap flex gap-x-1 ">
-        <div>Logout</div>
+        <div>{{'logout' | translate}}</div>
         <button mat-icon-button class="example-icon leading-none mx-2" aria-label="Example icon-button with share icon">
           <mat-icon>logout</mat-icon>
         </button>

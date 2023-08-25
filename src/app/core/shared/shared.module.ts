@@ -12,10 +12,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HasAnyAuthorityDirective } from "../directives/hasAnyAuthority.directive";
+import {MatMenuModule} from '@angular/material/menu';
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
     imports:[
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        TranslateModule
     ],
     exports:[
         MatInputModule,
@@ -31,7 +34,9 @@ import { HasAnyAuthorityDirective } from "../directives/hasAnyAuthority.directiv
         MatProgressSpinnerModule,
         MatIconModule,
         MatDialogModule,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        MatMenuModule,
+        TranslateModule
     ],
     providers: [  
         MatDatepickerModule,  

@@ -1,7 +1,7 @@
 <div class="bg-bg-main h-full">
     <div class="h-full">
         <app-header-layout class="sticky top-0 z-50"></app-header-layout>
-        <mat-drawer-container class="example-container">
+        <mat-drawer-container class="example-container" [dir]="getLang">
             <mat-drawer class="fixed top-16" #drawer [opened]="true" [mode]="'side'">
                 <app-side-menu class="sticky top-0 z-50"></app-side-menu>
             </mat-drawer>

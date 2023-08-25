@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from './core/translation/translation.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'stc-task';
+
+  constructor(private translate: TranslationService) {
+    this.translate.loadTranslations();
+  }
 }

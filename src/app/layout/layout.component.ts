@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslationService } from '../core/translation/translation.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
 
+  constructor(private translationService:TranslationService){
+
+  }
+
+  get getLang(){
+    return this.translationService.getCurrentLang() == 'ar' ? 'rtl' : 'ltr' ;
+  }
 }

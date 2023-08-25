@@ -24,8 +24,6 @@ export class HasAnyAuthorityDirective implements OnDestroy {
   }
 
   private updateView(authority:string | null): void {
-    console.log(authority);
-    
     if(!authority) this.createEmbeddedView();
     else if(authority != this.auth.getAuthority){
         this.viewContainerRef.clear();
