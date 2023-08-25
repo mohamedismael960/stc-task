@@ -1,7 +1,7 @@
 
 @mixin hover-image {
     img{
-        filter : invert(15%) sepia(94%) saturate(6251%) hue-rotate(266deg) brightness(95%) contrast(99%);
+        filter: invert(29%) sepia(55%) saturate(1350%) hue-rotate(205deg) brightness(94%) contrast(93%);
     }
 }
 
@@ -9,10 +9,8 @@
     @include hover-image;
 }
 .active{
-    img{
-        filter : invert(15%) sepia(94%) saturate(6251%) hue-rotate(266deg) brightness(95%) contrast(99%);
-    }
+    @include hover-image;
     .text{
-        color: #721DF1 !important;
+        color: var(--primary-color) !important;
     }
 }
