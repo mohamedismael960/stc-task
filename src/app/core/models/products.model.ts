@@ -1,4 +1,4 @@
-import { IEntity } from "../../../core/base/base-entity.model"
+import { IEntity } from "../base/base-entity.model"
 
 export interface IProduct extends IEntity {
     title?: string,

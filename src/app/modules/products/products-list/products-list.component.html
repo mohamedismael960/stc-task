@@ -1,1 +1,33 @@
-test
+<div class="w-full">
+  <div class="font-medium text-sm text-black mb-2">Select Category</div>
+  <mat-form-field appearance="outline" class="custom-field">
+    <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="getProduct()">
+      <mat-option *ngFor="let category of categories | async" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-select>
+</mat-form-field>
+</div>
+
+
+<div class="flex flex-wrap justify-between gap-5" *ngIf="selectedCategory">
+  <div *ngFor="let product of products | async">
+    <div class="max-w-sm bg-white  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <img class="rounded-lg w-80 h-60 p-4 m-auto" [src]="product.image" alt="" />
+      <div class="p-5">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.title}}</h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loader" class="m-auto mt-3">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<div *ngIf="!selectedCategory">
+  <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center mt-5">
+    Please Select Category
+  </h3>
+</div>
+

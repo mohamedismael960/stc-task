@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ManageProductsService } from '../services/manage-products.service';
-import { IProduct, Product } from '../models/manage-products.model';
+import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { Observable, Subscription, finalize, tap } from 'rxjs';
+import { IProduct, Product } from 'src/app/core/models/products.model';
 
 @Component({
   selector: 'app-manage-products-add',

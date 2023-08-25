@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IProduct } from '../models/manage-products.model';
 import { Subscription, tap } from 'rxjs';
-import { ManageProductsService } from '../services/manage-products.service';
+import { ManageProductsService } from '../../../core/services/manage-products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ManageProductsAddComponent } from '../manage-products-add/manage-products-add.component';
 import { BaseEntityComponent } from 'src/app/core/base/base-entity.component';
+import { IProduct } from 'src/app/core/models/products.model';
 
 @Component({
   selector: 'app-manage-products-list',
